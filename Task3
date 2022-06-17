@@ -1,0 +1,17 @@
+Parse “access.log” file - find all unique IP addresses.
+
+awk '{ print $1 }' <file directory>access.log | uniq
+		
+		or
+		
+$ grep -E -o "^[^^][0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}" access.log|uniq -c
+___________________________________________________________________________________
+
+Group IPs and sort them.
+
+sort -t . -k 3,3n -k 4,4n access.log
+____________________________________________________________________________________
+
+Calculate how much requests being made for each IP.
+
+awk '{ print $1 }' access.log | uniq | wc -l

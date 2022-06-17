@@ -1,0 +1,12 @@
+Extract from 'ps' output pids of all the processes run from the current user.
+
+ps -eo user,pid,cmd
+
+__________________________________________________________________________________
+Extract all ip addresses(ipv4 and ipv6) assigned to the host from ifconfig output. 
+
+All ipv4 addresses:
+ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
+
+All ipv6 addresses:
+ip -6 addr | grep -oP '(?<=inet6\s)[\da-f:]+'

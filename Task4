@@ -1,0 +1,29 @@
+#!/bin/bash
+echo "Check System Info"
+
+select selections in Num_of_CPU Disk_Space Size_Ram Last_users Perl_processes; do
+
+  case $selections in
+  "Num_of_CPU")
+    echo "Num of CPU is $(nproc)"
+    ;;
+  "Disk_Space")
+    echo "Disk Space $(df -x squashfs --total)"
+    ;;
+  "Size_Ram")
+    echo "Total memory is $(vmstat -s | awk '{print $1 / 1024 / 1024}' | head -1) GB"
+    ;;
+  "Last_users")
+    echo "Last users login to the host: $(last | head -n 10)"
+    ;;
+  "Perl_processes")
+    echo "All perl processes: $(pgrep -i 'python|perl' | wc -l)"
+    ;;
+  # Matching with invalid data
+  *)
+    echo "Invalid entry."
+    break
+    ;;
+  esac
+done
+
